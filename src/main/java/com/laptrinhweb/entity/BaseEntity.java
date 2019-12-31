@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class BaseEntity {
 
-	@Id
+	@Id//chỉ định id và not Null
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -27,19 +27,6 @@ public class BaseEntity {
 
 	@Column(name = "modifieddate")
 	private Date modifiedDate;
-
-	public BaseEntity() {
-		super();
-	}
-
-	public BaseEntity(Long id, String createdBy, String modifiedBy, Date createdDate, Date modifiedDate) {
-		super();
-		this.id = id;
-		this.createdBy = createdBy;
-		this.modifiedBy = modifiedBy;
-		this.createdDate = createdDate;
-		this.modifiedDate = modifiedDate;
-	}
 
 	public Long getId() {
 		return id;
