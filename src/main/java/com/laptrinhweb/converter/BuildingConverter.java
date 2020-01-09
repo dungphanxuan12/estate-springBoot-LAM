@@ -17,14 +17,20 @@ public class BuildingConverter {
 	public BuildingDTO convertToDTO(BuildingEntity buildingEntity) {
 		ModelMapper modelMapper = new ModelMapper();
 		BuildingDTO result = modelMapper.map(buildingEntity, BuildingDTO.class);
-		List<Integer> areas = buildingEntity.getAreas().stream().map(RentAreaEntity::getValue)
+
+		List<String> areas = buildingEntity.getAreas().stream()
+				.map(RentAreaEntity::getValue)
+				.map(item -> item.toString())
 				.collect(Collectors.toList());
+		
 		if (areas.size() > 0) {
 			result.setRentArea(StringUtils.join(areas, ","));
 		}
+		
 		if (StringUtils.isNotBlank(buildingEntity.getType())) {
 			result.setBuildingTypes(buildingEntity.getType().split(","));
 		}
+		
 		return result;
 	}
 
